@@ -2,14 +2,7 @@
 
 这是一个由大语言模型驱动的璀璨宝石(Splendor)游戏对战框架。该框架允许不同的LLM作为参赛者进行游戏对抗。
 
-## 项目特点
-
-- 完整实现璀璨宝石游戏规则和逻辑
-- 支持多种LLM代理进行对战
-- 美观的终端界面展示游戏状态
-- 详细的游戏历史记录和分析
-- 支持评估不同LLM在多场游戏中的表现
-- 通过配置文件灵活设置游戏参数和LLM模型
+***注意：本项目框架基于 Claude 3.7 生成，作者主要编写了游戏规则和流程部分的代码，并为每个阶段编写了简单的提示词；此项目处于开发之中，现行版本（Version 1.0.0）仅实现了最基本的功能。***
 
 ## 项目结构
 
@@ -33,9 +26,6 @@ splendor-llm/
 │   └── llm_factory.py  # LLM客户端工厂
 ├── main.py             # 主程序入口
 ├── config.json         # 配置文件
-├── demo.sh             # 演示脚本
-├── evaluate.sh         # 评估脚本
-├── config_example.sh   # 配置查看脚本
 ├── LLM_GUIDE.md        # LLM集成指南
 └── requirements.txt    # 项目依赖
 ```
@@ -55,7 +45,7 @@ pip install -r requirements.txt
 
 3. 设置API密钥:
 
-编辑`config.json`文件，填入各个模型所需的API密钥，或者设置环境变量:
+新建并编辑`config.json`文件，填入各个模型所需的API密钥，或者设置环境变量:
 ```bash
 export OPENAI_API_KEY=your_api_key_here
 export AZURE_OPENAI_API_KEY=your_azure_api_key_here
@@ -98,20 +88,7 @@ export AZURE_OPENAI_API_KEY=your_azure_api_key_here
 1. `openai` - OpenAI API (GPT-3.5, GPT-4等)
 2. `azure_openai` - Azure OpenAI服务
 
-要查看当前配置中的可用模型:
-```bash
-./config_example.sh
-```
-
 ## 使用方法
-
-### 运行演示游戏
-
-```bash
-./demo.sh
-```
-
-或者自定义参数:
 
 ```bash
 python main.py game --model "OpenAI GPT-3.5" --num-players 2 --delay 0.5
@@ -120,16 +97,6 @@ python main.py game --model "OpenAI GPT-3.5" --num-players 2 --delay 0.5
 ### 运行多模型对战
 
 让不同的LLM模型相互对战:
-
-```bash
-# 两个不同模型对战
-./demo_vs.sh
-
-# 四个不同模型对战
-./demo_multi.sh
-```
-
-或者自定义参数:
 
 ```bash
 # 两个不同模型对战
@@ -142,12 +109,6 @@ python main.py game --num-players 3 --num-llm-agents 3 \
 ```
 
 ### 评估LLM代理性能
-
-```bash
-./evaluate.sh
-```
-
-或者自定义参数:
 
 ```bash
 python main.py eval --model "OpenAI GPT-3.5" --num-games 10
@@ -190,4 +151,12 @@ python main.py eval --model "OpenAI GPT-3.5" --num-games 10
 
 3. 当玩家的发展卡达到一位贵族的要求时，该贵族会立即访问该玩家，提供额外的胜利点数
 
-4. 游戏在一位玩家达到15分后，完成当前回合结束 
+4. 游戏在一位玩家达到15分后，完成当前回合结束
+
+## 正在进行的开发
+
+1. 为代理添加反思和复盘过程；
+
+2. 完善代理的记忆模块管理；
+
+3. 输出更多中间信息，包括思考过程等；
